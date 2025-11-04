@@ -13,7 +13,7 @@
             "./vendor/bin/phpunit tests"
         ],
         "coverage": [
-            "./vendor/bin/phpunit --coverage-clover tests/report/clover.xml tests"
+            "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover tests/report/clover.xml tests"
         ]
     }
 }
