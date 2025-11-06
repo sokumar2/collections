@@ -30,4 +30,13 @@ class LinkedListTest extends TestCase
 
         $this->assertFalse($this->linkedList->isEmpty());
     }
+
+    public function testCount(): void
+    {
+        $this->linkedList->insert(1);
+        $this->linkedList->insert(2);
+        $this->linkedList->insert(3);
+
+        $this->assertEquals(3, $this->linkedList->count());
+    }
 }

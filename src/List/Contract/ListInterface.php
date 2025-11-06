@@ -2,7 +2,10 @@
 
 namespace Collection\List\Contract;
 
-interface ListInterface
+use Countable;
+use IteratorAggregate;
+
+interface ListInterface extends Countable, IteratorAggregate
 {
     public function insert(mixed $data): void;
 
