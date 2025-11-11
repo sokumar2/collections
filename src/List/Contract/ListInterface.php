@@ -14,4 +14,6 @@ interface ListInterface extends Countable, IteratorAggregate
     public function contains(mixed $data): bool;
 
     public function isEmpty(): bool;
+
+    public function toArray(): array;
 }
