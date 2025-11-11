@@ -72,4 +72,19 @@ class LinkedListTest extends TestCase
         $this->linkedList->delete(1);
         $this->assertEquals([], $this->linkedList->toArray());
     }
+
+    public function testContains(): void
+    {
+        $this->assertFalse($this->linkedList->contains(1));
+
+        $this->linkedList->insert(1);
+        $this->linkedList->insert(2);
+        $this->linkedList->insert(3);
+
+        $this->assertTrue($this->linkedList->contains(1));
+        $this->assertTrue($this->linkedList->contains(2));
+        $this->assertTrue($this->linkedList->contains(3));
+
+        $this->assertFalse($this->linkedList->contains(4));
+    }
 }
