@@ -33,10 +33,42 @@ class LinkedListTest extends TestCase
 
     public function testCount(): void
     {
+        $this->assertEquals(0, $this->linkedList->count());
+
+        $this->linkedList->delete(1);
+        $this->assertEquals(0, $this->linkedList->count());
+
         $this->linkedList->insert(1);
         $this->linkedList->insert(2);
         $this->linkedList->insert(3);
 
         $this->assertEquals(3, $this->linkedList->count());
+
+        $this->linkedList->delete(2);
+        $this->assertEquals(2, $this->linkedList->count());
+
+        $this->linkedList->delete(3);
+        $this->assertEquals(1, $this->linkedList->count());
+
+        $this->linkedList->delete(1);
+        $this->assertEquals(0, $this->linkedList->count());
+    }
+
+    public function testDelete(): void
+    {
+        $this->linkedList->insert(1);
+        $this->linkedList->insert(2);
+        $this->linkedList->insert(3);
+
+        $this->assertEquals([1, 2, 3], $this->linkedList->toArray());
+
+        $this->linkedList->delete(2);
+        $this->assertEquals([1, 3], $this->linkedList->toArray());
+
+        $this->linkedList->delete(3);
+        $this->assertEquals([1], $this->linkedList->toArray());
+
+        $this->linkedList->delete(1);
+        $this->assertEquals([], $this->linkedList->toArray());
     }
 }
