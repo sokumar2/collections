@@ -12,6 +12,8 @@ class ListFactory extends AbstractCollectionFactory
     {
         if (ListType::LinkedList === $type) {
             return new LinkedList();
+        } elseif (ListType::ArrayList === $type) {
+            return new ArrayList();
         }
 
         return null;
