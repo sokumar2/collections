@@ -2,26 +2,28 @@
 
 namespace Collection\List;
 
-use Collection\List\AbstractLinkedList;
+use Traversable;
+use Collection\List\AbstractList;
+use Collection\List\Trait\LinkedListIteratorTrait;
 
-class LinkedList extends AbstractLinkedList
+class LinkedList extends AbstractList
 {
     protected ?Node $head = null;
 
-    public function insert(mixed $data): void
+    public function insert(mixed $value): void
     {
-        $this->head = $this->insertNode($this->head, $data);
+        $this->head = $this->insertNode($this->head, $value);
     }
 
-    private function insertNode(?Node $node, mixed $data): ?Node
+    private function insertNode(?Node $node, mixed $value): ?Node
     {
         if (null === $node) {
             $this->count++;
 
-            return new Node($data);
+            return new Node($value);
         }
 
-        $node->right = $this->insertNode($node->right, $data);
+        $node->right = $this->insertNode($node->right, $value);
         if (null !== $node->right) {
             $node->right->left = $node;
         }
@@ -29,18 +31,18 @@ class LinkedList extends AbstractLinkedList
         return $node;
     }
 
-    public function delete(mixed $data): void
+    public function delete(mixed $value): void
     {
-        $this->head = $this->deleteNode($this->head, $data);
+        $this->head = $this->deleteNode($this->head, $value);
     }
 
-    private function deleteNode(?Node $node, mixed $data): ?Node
+    private function deleteNode(?Node $node, mixed $value): ?Node
     {
         if (null === $node) {
             return $node;
         }
 
-        if ($data === $node->data) {
+        if ($value === $node->value) {
             $this->count--;
 
             if (null === $node->left && null === $node->right) {
@@ -56,39 +58,33 @@ class LinkedList extends AbstractLinkedList
             }
         }
 
-        $this->deleteNode($node->right, $data);
+        $this->deleteNode($node->right, $value);
 
         return $node;
     }
 
-    public function contains(mixed $data): bool
+    public function contains(mixed $value): bool
     {
-        return $this->containsNode($this->head, $data);
+        return $this->containsNode($this->head, $value);
     }
 
-    private function containsNode(?Node $node, mixed $data): bool
+    private function containsNode(?Node $node, mixed $value): bool
     {
         if (null === $node) {
             return false;
-        } elseif ($data === $node->data) {
+        } elseif ($value === $node->value) {
             return true;
         }
 
-        return $this->containsNode($node->right, $data);
+        return $this->containsNode($node->right, $value);
     }
 
-    public function isEmpty(): bool
+    public function getIterator(): Traversable
     {
-        return 0 === $this->count();
-    }
-
-    public function toArray(): array
-    {
-        $list = [];
-        foreach($this as $data) {
-            $list[] = $data;
-        }
-
-        return $list;
+        return (function () {
+            for ($node = $this->head; null != $node; $node = $node->right) {
+                yield $node->value;
+            }
+        })();
     }
 }
