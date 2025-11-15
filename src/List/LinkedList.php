@@ -4,87 +4,144 @@ namespace Collection\List;
 
 use Traversable;
 use Collection\List\AbstractList;
-use Collection\List\Trait\LinkedListIteratorTrait;
 
 class LinkedList extends AbstractList
 {
-    protected ?Node $head = null;
+    protected ?Entry $first = null;
 
-    public function insert(mixed $value): void
+    protected ?Entry $last = null;
+
+    public function add(mixed $value): bool
     {
-        $this->head = $this->insertNode($this->head, $value);
+        $this->addLast(new Entry($value));
+
+        return true;
     }
 
-    private function insertNode(?Node $node, mixed $value): ?Node
+    private function addLast(Entry $entry): void
     {
-        if (null === $node) {
-            $this->count++;
-
-            return new Node($value);
+        if (null === $this->first) {
+            $this->first = $this->last = $entry;
+        } else {
+            $entry->previous = $this->last;
+            $this->last->next = $entry;
+            $this->last = $entry;
         }
 
-        $node->right = $this->insertNode($node->right, $value);
-        if (null !== $node->right) {
-            $node->right->left = $node;
-        }
-
-        return $node;
+        $this->count++;
     }
 
-    public function delete(mixed $value): void
+    public function remove(mixed $value): bool
     {
-        $this->head = $this->deleteNode($this->head, $value);
+        $entry = $this->first;
+        while (null !== $entry) {
+            if ($value === $entry->value) {
+                $this->removeEntry($entry);
+
+                return true;
+            }
+
+            $entry = $entry->next;
+        }
+
+        return false;
     }
 
-    private function deleteNode(?Node $node, mixed $value): ?Node
+    private function removeEntry(Entry $entry): void
     {
-        if (null === $node) {
-            return $node;
+        if ($entry === $this->first) {
+            $this->removeFirst();
+        } elseif ($entry === $this->last) {
+            $this->removeLast();
+        } else {
+            $entry->previous->next = $entry->next;
+            $entry->next->previous = $entry->previous;
         }
 
-        if ($value === $node->value) {
-            $this->count--;
+        $this->count--;
 
-            if (null === $node->left && null === $node->right) {
-                return null;
-            }
+        $entry->previous = $entry->next = null;
+        unset($entry);
+    }
 
-            if (null !== $node->right) {
-                $node->right->left = $node->left;
-            }
-
-            if (null !== $node->left) {
-                $node->left->right = $node->right;
-            }
+    private function removeFirst(): void
+    {
+        if (null !== $this->first->next) {
+            $this->first->next->previous = null;
+        } else {
+            $this->last = null;
         }
 
-        $this->deleteNode($node->right, $value);
+        $this->first = $this->first->next;
+    }
 
-        return $node;
+    private function removeLast(): void
+    {
+        if (null !== $this->last->previous) {
+            $this->last->previous->next = null;
+        } else {
+            $this->first = null;
+        }
+
+        $this->last = $this->last->previous;
     }
 
     public function contains(mixed $value): bool
     {
-        return $this->containsNode($this->head, $value);
+        return $this->containsEntry($this->first, $value);
     }
 
-    private function containsNode(?Node $node, mixed $value): bool
+    private function containsEntry(?Entry $entry, mixed $value): bool
     {
-        if (null === $node) {
+        if (null === $entry) {
             return false;
-        } elseif ($value === $node->value) {
+        } elseif ($value === $entry->value) {
             return true;
         }
 
-        return $this->containsNode($node->right, $value);
+        return $this->containsEntry($entry->next, $value);
     }
 
     public function getIterator(): Traversable
     {
         return (function () {
-            for ($node = $this->head; null != $node; $node = $node->right) {
-                yield $node->value;
+            for ($entry = $this->first; null != $entry; $entry = $entry->next) {
+                yield $entry->value;
             }
         })();
+    }
+
+    public function transform(callable $callable): self
+    {
+        $entry = $this->first;
+        while (null !== $entry) {
+            $entry->value = call_user_func($callable, $entry->value);
+            $entry = $entry->next;
+        }
+
+        return $this;
+    }
+
+    public function filter(callable $callable): self
+    {
+        $entry = $this->first;
+        while (null !== $entry) {
+            $next = $entry->next;
+            if (!call_user_func($callable, $entry->value)) {
+                $this->removeEntry($entry);
+            }
+
+            $entry = $next;
+        }
+
+        return $this;
+    }
+
+    public function clear(): void
+    {
+        if (0 < $this->count) {
+            $this->first = $this->last = null;
+            $this->count = 0;
+        }
     }
 }
