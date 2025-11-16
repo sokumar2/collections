@@ -10,14 +10,16 @@ class ArrayList extends AbstractList {
 
     protected array $data = [];
 
-    public function insert(mixed $value): void
+    public function add(mixed $value): bool
     {
         $this->data[] = $value;
 
         $this->count++;
+
+        return true;
     }
 
-    public function delete(mixed $value): void
+    public function remove(mixed $value): bool
     {
         $index = array_search($value, $this->data, true);
 
@@ -28,7 +30,11 @@ class ArrayList extends AbstractList {
                 );
 
             $this->count--;
+
+            return true;
         }
+
+        return false;
     }
 
     public function contains(mixed $value): bool
@@ -45,5 +51,36 @@ class ArrayList extends AbstractList {
         })();
     }
 
+    public function transform(callable $callback): self
+    {
+        foreach ($this->data as $key => $value) {
+            $this->data[$key] = call_user_func($callback, $value);
+        }
+
+        return $this;
+    }
+
+    public function filter(callable $callback): self
+    {
+        foreach ($this->data as $key => $value) {
+            if (!call_user_func($callback, $value)) {
+                unset($this->data[$key]);
+
+                $this->count--;
+            }
+        }
+
+        $this->data = array_values($this->data);
+
+        return $this;
+    }
+
+    public function clear(): void
+    {
+        if (0 < $this->count) {
+            $this->data = [];
+            $this->count = 0;
+        }
+    }
 }
 
