@@ -13,6 +13,16 @@ interface ListInterface extends Countable,
 {
     public function add(mixed $value): bool;
 
+    public function addFirst(mixed $value): void;
+
+    public function addLast(mixed $value): void;
+
+    public function addAll(ListInterface $list): bool;
+
+    public function removeFirst(): mixed;
+
+    public function removeLast(): mixed;
+
     public function remove(mixed $value): bool;
 
     public function contains(mixed $value): bool;

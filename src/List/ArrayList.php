@@ -3,8 +3,8 @@
 namespace Collection\List;
 
 use Traversable;
-use ArrayIterator;
 use Collection\List\AbstractList;
+use Collection\List\Contract\ListInterface;
 
 class ArrayList extends AbstractList {
 
@@ -12,9 +12,30 @@ class ArrayList extends AbstractList {
 
     public function add(mixed $value): bool
     {
+        $this->addLast($value);
+
+        return true;
+    }
+
+    public function addFirst(mixed $value): void
+    {
+        array_unshift($this->data, $value);
+
+        $this->count++;
+    }
+
+    public function addLast(mixed $value): void
+    {
         $this->data[] = $value;
 
         $this->count++;
+    }
+
+    public function addAll(ListInterface $list): bool
+    {
+        foreach ($list as $value) {
+            $this->add($value);
+        }
 
         return true;
     }
@@ -35,6 +56,20 @@ class ArrayList extends AbstractList {
         }
 
         return false;
+    }
+
+    public function removeFirst(): mixed
+    {
+        $this->count--;
+
+        return array_shift($this->data);
+    }
+
+    public function removeLast(): mixed
+    {
+        $this->count--;
+
+        return array_pop($this->data);
     }
 
     public function contains(mixed $value): bool

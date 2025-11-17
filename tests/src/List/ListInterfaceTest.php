@@ -29,6 +29,16 @@ class ListInterfaceTest extends TestCase
         ];
     }
 
+    public static function multiObjectProvider(): array
+    {
+        $listFactory = new ListFactory();
+
+        return [
+            [$listFactory->make(Type::LinkedList), $listFactory->make(Type::LinkedList)],
+            [$listFactory->make(Type::ArrayList), $listFactory->make(Type::ArrayList)]
+        ];
+    }
+
     #[DataProvider('objectProvider')]
     public function testIsEmpty(ListInterface $list): void
     {
@@ -124,6 +134,7 @@ class ListInterfaceTest extends TestCase
             return 0 === ($value % 2);
         });
 
+        $this->assertEquals(2, $list->count());
         $this->assertEquals([2, 4], $list->toArray());
     }
 
@@ -134,7 +145,71 @@ class ListInterfaceTest extends TestCase
         $list->clear();
 
         $this->assertTrue($list->isEmpty());
+        $this->assertEquals(0, $list->count());
         $this->assertEquals([], $list->toArray());
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testAddFirst(ListInterface $list): void
+    {
+        $list->addFirst(1);
+        $list->addFirst(2);
+
+        $this->assertEquals(2, $list->count());
+        $this->assertEquals([2, 1], $list->toArray());
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testAddLast(ListInterface $list): void
+    {
+        $list->addLast(1);
+        $list->addLast(2);
+
+        $this->assertEquals(2, $list->count());
+        $this->assertEquals([1, 2], $list->toArray());
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testRemoveFirst(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $list->removeFirst();
+
+        $this->assertEquals(2, $list->count());
+        $this->assertEquals([2, 3], $list->toArray());
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testRemoveLast(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $list->removeLast();
+
+        $this->assertEquals(2, $list->count());
+        $this->assertEquals([1, 2], $list->toArray());
+    }
+
+    #[DataProvider('multiObjectProvider')]
+    public function testAddAll(ListInterface $listOne, ListInterface $listTwo): void
+    {
+        $listOne->add(1);
+        $listOne->add(2);
+        $listOne->add(3);
+
+        $listTwo->add(4);
+        $listTwo->add(5);
+        $listTwo->add(6);
+
+        $listOne->addAll($listTwo);
+
+        $this->assertEquals(6, $listOne->count());
+        $this->assertEquals([1, 2, 3, 4, 5, 6], $listOne->toArray());
     }
 
 }
