@@ -293,4 +293,17 @@ class ListInterfaceTest extends TestCase
         $list->unset(0);
         $this->assertEquals([], $list->toArray());
     }
+
+    #[DataProvider('objectProvider')]
+    public function testSerialization(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $list = unserialize(serialize($list));
+
+        $this->assertEquals([1, 2, 3], $list->toArray());
+    }
+
 }
