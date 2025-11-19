@@ -3,9 +3,9 @@
 namespace Collection\List;
 
 use Collection\List\Type;
-use Collection\List\Contract\ListInterface;
+use Collection\List\Interface\ListInterface;
 
-abstract class AbstractCollectionFactory
+abstract class AbstractListFactory
 {
     abstract public function make(Type $type): ?ListInterface;
 

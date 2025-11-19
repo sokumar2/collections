@@ -4,7 +4,6 @@ namespace Collection\List;
 
 use Traversable;
 use Collection\List\AbstractList;
-use Collection\List\Contract\ListInterface;
 
 class LinkedList extends AbstractList
 {
@@ -58,7 +57,7 @@ class LinkedList extends AbstractList
         return false;
     }
 
-    private function removeEntry(Entry $entry): void
+    protected function removeEntry(Entry $entry): void
     {
         if ($entry === $this->first) {
             $this->removeFirst();
@@ -115,7 +114,7 @@ class LinkedList extends AbstractList
         return $this->containsEntry($this->first, $value);
     }
 
-    private function containsEntry(?Entry $entry, mixed $value): bool
+    protected function containsEntry(?Entry $entry, mixed $value): bool
     {
         if (null === $entry) {
             return false;
@@ -176,7 +175,7 @@ class LinkedList extends AbstractList
         return $this->getEntry($index)->value;
     }
 
-    private function getEntry(int $index): ?Entry
+    protected function getEntry(int $index): ?Entry
     {
         $entry = $this->last;
 

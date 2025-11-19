@@ -1,6 +1,6 @@
 <?php
 
-namespace Collection\List\Contract;
+namespace Collection\List\Interface;
 
 interface TransformableInterface
 {
