@@ -4,6 +4,7 @@ namespace Collection\List;
 
 use Traversable;
 use Collection\List\AbstractList;
+use Collection\List\Contract\ListInterface;
 
 class LinkedList extends AbstractList
 {
@@ -13,13 +14,39 @@ class LinkedList extends AbstractList
 
     public function add(mixed $value): bool
     {
-        $this->addLast(new Entry($value));
+        $this->addLast($value);
 
         return true;
     }
 
-    private function addLast(Entry $entry): void
+    public function addAll(ListInterface $list): bool
     {
+        foreach ($list as $value) {
+            $this->add($value);
+        }
+
+        return true;
+    }
+
+    public function addFirst(mixed $value): void
+    {
+        $entry = new Entry($value);
+
+        if (null === $this->first) {
+            $this->first = $this->last = $entry;
+        } else {
+            $entry->next = $this->first;
+            $this->first->previous = $entry;
+            $this->first = $entry;
+        }
+
+        $this->count++;
+    }
+
+    public function addLast(mixed $value): void
+    {
+        $entry = new Entry($value);
+
         if (null === $this->first) {
             $this->first = $this->last = $entry;
         } else {
@@ -56,16 +83,17 @@ class LinkedList extends AbstractList
         } else {
             $entry->previous->next = $entry->next;
             $entry->next->previous = $entry->previous;
+
+            $entry->next = $entry->previous = null;
+
+            $this->count--;
         }
-
-        $this->count--;
-
-        $entry->previous = $entry->next = null;
-        unset($entry);
     }
 
-    private function removeFirst(): void
+    public function removeFirst(): mixed
     {
+        $entry = $this->first;
+
         if (null !== $this->first->next) {
             $this->first->next->previous = null;
         } else {
@@ -73,10 +101,17 @@ class LinkedList extends AbstractList
         }
 
         $this->first = $this->first->next;
+        $entry->next = $entry->previous = null;
+
+        $this->count--;
+
+        return $entry->value;
     }
 
-    private function removeLast(): void
+    public function removeLast(): mixed
     {
+        $entry = $this->last;
+
         if (null !== $this->last->previous) {
             $this->last->previous->next = null;
         } else {
@@ -84,6 +119,11 @@ class LinkedList extends AbstractList
         }
 
         $this->last = $this->last->previous;
+        $entry->next = $entry->previous = null;
+
+        $this->count--;
+
+        return $entry->value;
     }
 
     public function contains(mixed $value): bool
