@@ -10,13 +10,6 @@ class ArrayList extends AbstractList {
 
     protected array $data = [];
 
-    public function add(mixed $value): bool
-    {
-        $this->addLast($value);
-
-        return true;
-    }
-
     public function addFirst(mixed $value): void
     {
         array_unshift($this->data, $value);
@@ -29,15 +22,6 @@ class ArrayList extends AbstractList {
         $this->data[] = $value;
 
         $this->count++;
-    }
-
-    public function addAll(ListInterface $list): bool
-    {
-        foreach ($list as $value) {
-            $this->add($value);
-        }
-
-        return true;
     }
 
     public function remove(mixed $value): bool
@@ -117,5 +101,54 @@ class ArrayList extends AbstractList {
             $this->count = 0;
         }
     }
-}
 
+    public function get(int $index): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        return $this->data[$index];
+    }
+
+    public function set(int $index, mixed $value): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        $old = $this->data[$index];
+        $this->data[$index] = $value;
+
+        return $old;
+    }
+
+    public function unset(int $index): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        $value = $this->data[$index];
+        unset($this->data[$index]);
+        $this->data = array_values($this->data);
+
+        return $value;
+    }
+
+    public function indexOf(mixed $value): int
+    {
+        $index = array_search($value, $this->data, true);;
+
+        if (false !== $index) {
+            return $index;
+        }
+
+        return -1;
+    }
+
+    public function lastIndexOf(mixed $value): int
+    {
+        $indexes = array_keys($this->data, $value, true);
+
+        if (!empty($indexes)) {
+            return array_pop($indexes);
+        }
+
+        return -1;
+    }
+}

@@ -12,22 +12,6 @@ class LinkedList extends AbstractList
 
     protected ?Entry $last = null;
 
-    public function add(mixed $value): bool
-    {
-        $this->addLast($value);
-
-        return true;
-    }
-
-    public function addAll(ListInterface $list): bool
-    {
-        foreach ($list as $value) {
-            $this->add($value);
-        }
-
-        return true;
-    }
-
     public function addFirst(mixed $value): void
     {
         $entry = new Entry($value);
@@ -183,5 +167,87 @@ class LinkedList extends AbstractList
             $this->first = $this->last = null;
             $this->count = 0;
         }
+    }
+
+    public function get(int $index): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        return $this->getEntry($index)->value;
+    }
+
+    private function getEntry(int $index): ?Entry
+    {
+        $entry = $this->last;
+
+        if ($index < ($this->count / 2)) {
+            $entry = $this->first;
+
+            while ($index-- > 0) {
+                $entry = $entry->next;
+            }
+        } else {
+            while (++$index < $this->count) {
+                $entry = $entry->previous;
+            }
+        }
+
+        return $entry;
+    }
+
+    public function set(int $index, mixed $value): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        $entry = $this->getEntry($index);
+        $old = $entry->value;
+        $entry->value = $value;
+
+        return $old;
+    }
+
+    public function unset(int $index): mixed
+    {
+        $this->checkBoundsExclusive($index);
+
+        $entry = $this->getEntry($index);
+        $this->removeEntry($entry);
+
+        return $entry->value;
+    }
+
+    public function indexOf(mixed $value): int
+    {
+        $index = 0;
+
+        $entry = $this->first;
+        while (null !== $entry) {
+            if ($value === $entry->value) {
+                return $index;
+            }
+
+            $index++;
+            $entry = $entry->next;
+        }
+
+        return -1;
+    }
+
+    public function lastIndexOf(mixed $value): int
+    {
+        $index = $this->count - 1;
+
+        $entry = $this->last;
+
+        while (null !== $entry) {
+            if ($value === $entry->value) {
+                return $index;
+            }
+
+            $index--;
+            $entry = $entry->previous;
+        }
+
+        return -1;
     }
 }
