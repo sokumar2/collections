@@ -3,9 +3,11 @@
 namespace Collection\List\Contract;
 
 use Countable;
+use Serializable;
 use IteratorAggregate;
 
 interface ListInterface extends Countable,
+                                Serializable,
                                 ArrayableInterface,
                                 IteratorAggregate,
                                 TransformableInterface,

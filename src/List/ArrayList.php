@@ -151,4 +151,15 @@ class ArrayList extends AbstractList {
 
         return -1;
     }
+
+    public function serialize(): ?string
+    {
+        return serialize($this->data);
+    }
+
+    public function unserialize(string $data): void
+    {
+        $this->data = unserialize($data);
+    }
+
 }
