@@ -4,7 +4,6 @@ namespace Collection\List;
 
 use Traversable;
 use Collection\List\AbstractList;
-use Collection\List\Contract\ListInterface;
 
 class ArrayList extends AbstractList {
 
@@ -125,6 +124,8 @@ class ArrayList extends AbstractList {
 
         $value = $this->data[$index];
         unset($this->data[$index]);
+        $this->count--;
+
         $this->data = array_values($this->data);
 
         return $value;

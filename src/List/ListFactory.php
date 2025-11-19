@@ -4,9 +4,9 @@ namespace Collection\List;
 
 use Collection\List\Type;
 use Collection\List\LinkedList;
-use Collection\List\Contract\ListInterface;
+use Collection\List\Interface\ListInterface;
 
-class ListFactory extends AbstractCollectionFactory
+class ListFactory extends AbstractListFactory
 {
     public function make(Type $type): ?ListInterface
     {

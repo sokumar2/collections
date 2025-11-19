@@ -2,11 +2,11 @@
 
 namespace Collection\List;
 
-use OutOfBoundsException;
 use Collection\List\Trait\ArrayableTrait;
 use Collection\List\Trait\EmptiableTrait;
 use Collection\List\Trait\CountableTrait;
-use Collection\List\Contract\ListInterface;
+use Collection\List\Interface\ListInterface;
+use Collection\List\Exception\IndexOutOfBoundsException;
 
 abstract class AbstractList implements ListInterface
 {
@@ -33,7 +33,7 @@ abstract class AbstractList implements ListInterface
     protected function checkBoundsExclusive(int $index): void
     {
         if ($index < 0 || $index >= $this->count) {
-            throw new OutOfBoundsException("Index: " . $index . ", Size:" . $this->count);
+            throw new IndexOutOfBoundsException("Index: " . $index . ", Size:" . $this->count);
         }
     }
 }

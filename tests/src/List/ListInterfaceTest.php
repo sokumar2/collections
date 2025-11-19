@@ -8,10 +8,11 @@ use Collection\List\Entry;
 use Collection\List\ArrayList;
 use Collection\List\LinkedList;
 use Collection\List\ListFactory;
-use Collection\List\Contract\ListInterface;
 use PHPUnit\Framework\Attributes\UsesClass;
+use Collection\List\Interface\ListInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Collection\List\Exception\IndexOutOfBoundsException;
 
 #[CoversClass(LinkedList::class)]
 #[CoversClass(ArrayList::class)]
@@ -146,7 +147,7 @@ class ListInterfaceTest extends TestCase
 
         $this->assertTrue($list->isEmpty());
         $this->assertEquals(0, $list->count());
-        $this->assertEquals([], $list->toArray());
+        $this->assertEmpty($list->toArray());
     }
 
     #[DataProvider('objectProvider')]
@@ -227,6 +228,9 @@ class ListInterfaceTest extends TestCase
 
         $value = $list->get(1);
         $this->assertEquals(2, $value);
+
+        $this->expectException(IndexOutOfBoundsException::class);
+        $list->get(3);
     }
 
     #[DataProvider('objectProvider')]
@@ -241,6 +245,8 @@ class ListInterfaceTest extends TestCase
         $this->assertEquals(1, $list->indexOf(2));
 
         $this->assertEquals(2, $list->indexOf(3));
+
+        $this->assertEquals(-1, $list->indexOf(4));
     }
 
     #[DataProvider('objectProvider')]
@@ -261,6 +267,8 @@ class ListInterfaceTest extends TestCase
 
         $this->assertEquals(4, $list->indexOf(3));
         $this->assertEquals(5, $list->lastIndexOf(3));
+
+        $this->assertEquals(-1, $list->lastIndexOf(4));
     }
 
     #[DataProvider('objectProvider')]
@@ -275,6 +283,9 @@ class ListInterfaceTest extends TestCase
         $list->set(2, 3);
 
         $this->assertEquals([1, 2, 3], $list->toArray());
+
+        $this->expectException(IndexOutOfBoundsException::class);
+        $list->set(3, 4);
     }
 
     #[DataProvider('objectProvider')]
@@ -291,7 +302,10 @@ class ListInterfaceTest extends TestCase
         $this->assertEquals([3], $list->toArray());
 
         $list->unset(0);
-        $this->assertEquals([], $list->toArray());
+        $this->assertEmpty($list->toArray());
+
+        $this->expectException(IndexOutOfBoundsException::class);
+        $list->unset(0);
     }
 
     #[DataProvider('objectProvider')]
