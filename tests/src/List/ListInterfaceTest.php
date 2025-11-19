@@ -212,4 +212,85 @@ class ListInterfaceTest extends TestCase
         $this->assertEquals([1, 2, 3, 4, 5, 6], $listOne->toArray());
     }
 
+    #[DataProvider('objectProvider')]
+    public function testGet(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $value = $list->get(0);
+        $this->assertEquals(1, $value);
+
+        $value = $list->get(2);
+        $this->assertEquals(3, $value);
+
+        $value = $list->get(1);
+        $this->assertEquals(2, $value);
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testIndexOf(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $this->assertEquals(0, $list->indexOf(1));
+
+        $this->assertEquals(1, $list->indexOf(2));
+
+        $this->assertEquals(2, $list->indexOf(3));
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testLastIndexOf(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(1);
+        $list->add(2);
+        $list->add(2);
+        $list->add(3);
+        $list->add(3);
+
+        $this->assertEquals(0, $list->indexOf(1));
+        $this->assertEquals(1, $list->lastIndexOf(1));
+
+        $this->assertEquals(2, $list->indexOf(2));
+        $this->assertEquals(3, $list->lastIndexOf(2));
+
+        $this->assertEquals(4, $list->indexOf(3));
+        $this->assertEquals(5, $list->lastIndexOf(3));
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testSet(ListInterface $list): void
+    {
+        $list->add(4);
+        $list->add(5);
+        $list->add(6);
+
+        $list->set(0, 1);
+        $list->set(1, 2);
+        $list->set(2, 3);
+
+        $this->assertEquals([1, 2, 3], $list->toArray());
+    }
+
+    #[DataProvider('objectProvider')]
+    public function testUnset(ListInterface $list): void
+    {
+        $list->add(1);
+        $list->add(2);
+        $list->add(3);
+
+        $list->unset(1);
+        $this->assertEquals([1, 3], $list->toArray());
+
+        $list->unset(0);
+        $this->assertEquals([3], $list->toArray());
+
+        $list->unset(0);
+        $this->assertEquals([], $list->toArray());
+    }
 }

@@ -9,7 +9,8 @@ interface ListInterface extends Countable,
                                 ArrayableInterface,
                                 IteratorAggregate,
                                 TransformableInterface,
-                                FilterableInterface
+                                FilterableInterface,
+                                IndexableInterface
 {
     public function add(mixed $value): bool;
 
