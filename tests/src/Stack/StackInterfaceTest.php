@@ -19,7 +19,7 @@ class StackInterfaceTest extends TestCase
     public static function objectProvider(): array
     {
         return [
-            [new StackFactory()->createInstance()]
+            [(new StackFactory())->createInstance()]
         ];
     }
 
