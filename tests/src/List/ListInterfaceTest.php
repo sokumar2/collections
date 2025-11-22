@@ -3,11 +3,12 @@
 namespace Tests\List;
 
 use Tests\TestCase;
-use Collection\List\Type;
 use Collection\List\Entry;
 use Collection\List\ArrayList;
 use Collection\List\LinkedList;
 use Collection\List\ListFactory;
+use Collection\List\ArrayListFactory;
+use Collection\List\LinkedListFactory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use Collection\List\Interface\ListInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -16,27 +17,24 @@ use Collection\List\Exception\IndexOutOfBoundsException;
 
 #[CoversClass(LinkedList::class)]
 #[CoversClass(ArrayList::class)]
-#[UsesClass(ListFactory::class)]
+#[UsesClass(LinkedListFactory::class)]
+#[UsesClass(ArrayListFactory::class)]
 #[UsesClass(Entry::class)]
 class ListInterfaceTest extends TestCase
 {
     public static function objectProvider(): array
     {
-        $listFactory = new ListFactory();
-
         return [
-            [$listFactory->make(Type::LinkedList)],
-            [$listFactory->make(Type::ArrayList)],
+            [(new LinkedListFactory())->createInstance()],
+            [(new LinkedListFactory())->createInstance()],
         ];
     }
 
     public static function multiObjectProvider(): array
     {
-        $listFactory = new ListFactory();
-
         return [
-            [$listFactory->make(Type::LinkedList), $listFactory->make(Type::LinkedList)],
-            [$listFactory->make(Type::ArrayList), $listFactory->make(Type::ArrayList)]
+            [(new LinkedListFactory())->createInstance(), (new LinkedListFactory())->createInstance()],
+            [(new ArrayListFactory())->createInstance(), (new ArrayListFactory())->createInstance()]
         ];
     }
 

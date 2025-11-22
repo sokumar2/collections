@@ -1,5 +1,16 @@
 {
+    "name": "sokumar2/collections",
+    "description": "A set of interfaces for storing and manipulating a collection of objects.",
     "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "linkedlist",
+        "arraylist",
+        "stack"
+    ],
+    "require": {
+        "php": ">=8.0.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^12.4"
     },
@@ -20,5 +31,11 @@
         "coverage": [
             "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover tests/report/clover.xml tests"
         ]
-    }
+    },
+    "authors": [
+        {
+            "name": "Soumya Kumar",
+            "email": "sokumar2@gmail.com"
+        }
+    ]
 }
