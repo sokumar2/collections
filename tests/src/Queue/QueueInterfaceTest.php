@@ -57,8 +57,8 @@ class QueueInterfaceTest extends TestCase
         $queue->queue(3);
         $queue->queue(2);
         $queue->queue(1);
-    
-        $Queue = unserialize(serialize($queue));
+
+        $queue = unserialize(serialize($queue));
 
         $this->assertEquals(3, $queue->peek());
         $this->assertEquals(3, $queue->count());
