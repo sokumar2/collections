@@ -153,14 +153,14 @@ class ArrayList extends AbstractList {
         return -1;
     }
 
-    public function serialize(): ?string
+    public function __serialize(): array
     {
-        return serialize($this->data);
+        return $this->data;
     }
 
-    public function unserialize(string $data): void
+    public function __unserialize(array $data): void
     {
-        $this->data = unserialize($data);
+        $this->data = $data;
     }
 
 }
