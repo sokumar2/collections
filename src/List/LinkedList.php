@@ -250,15 +250,14 @@ class LinkedList extends AbstractList
         return -1;
     }
 
-    public function serialize(): ?string
+    public function __serialize(): array
     {
-        return serialize($this->toArray());
+        return $this->toArray();
     }
 
-    public function unserialize(string $data): void
+    public function __unserialize(array $data): void
     {
-        $values = unserialize($data);
-        foreach ($values as $value) {
+        foreach ($data as $value) {
             $this->add($value);
         }
     }

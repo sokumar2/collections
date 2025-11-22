@@ -3,16 +3,15 @@
 namespace Collection\List\Interface;
 
 use Countable;
-use Serializable;
 use IteratorAggregate;
 
 interface ListInterface extends Countable,
-                                Serializable,
                                 ArrayableInterface,
                                 IteratorAggregate,
                                 TransformableInterface,
                                 FilterableInterface,
-                                IndexableInterface
+                                IndexableInterface,
+                                SerializableInterface
 {
     public function add(mixed $value): bool;
 
