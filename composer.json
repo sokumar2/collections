@@ -1,5 +1,5 @@
 {
-    "name": "sk/collections",
+    "name": "sokumar2/collections",
     "description": "A set of interfaces for storing and manipulating a collection of objects.",
     "type": "library",
     "license": "MIT",
