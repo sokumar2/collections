@@ -10,6 +10,11 @@ A set of interfaces in PHP for storing and manipulating a collection of objects.
 * [Stack](./src/Stack/Stack.php) A double linked list backed LIFO structure, _push_, _pop_ and _peek_ are all O(1).
 * [Queue](./src/Queue/Queue.php) A double linked list backed FIFO structure, _queue_, _dequeue_ and _peek_ are all O(1).
 
+## Installation
+```console
+composer require sokumar2/collections
+```
+
 ## Usage
 ### Linked List
 You can get an instance of a LinkedList from its factory by calling the `createInstance` method. This ensures that only a concrete implementation of ListInterface is created.
