@@ -1,8 +1,8 @@
 <?php
 
-namespace Collection\Stack;
+namespace SK\Collection\Stack;
 
-use Collection\Stack\Interface\StackInterface;
+use SK\Collection\Stack\Interface\StackInterface;
 
 abstract class AbstractStackFactory
 {

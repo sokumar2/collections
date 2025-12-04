@@ -1,9 +1,9 @@
 <?php
 
-namespace Collection\Stack;
+namespace SK\Collection\Stack;
 
-use Collection\Stack\Stack;
-use Collection\Stack\Interface\StackInterface;
+use SK\Collection\Stack\Stack;
+use SK\Collection\Stack\Interface\StackInterface;
 
 class StackFactory extends AbstractStackFactory
 {

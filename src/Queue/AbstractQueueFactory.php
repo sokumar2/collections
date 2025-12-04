@@ -1,8 +1,8 @@
 <?php
 
-namespace Collection\Queue;
+namespace SK\Collection\Queue;
 
-use Collection\Queue\Interface\QueueInterface;
+use SK\Collection\Queue\Interface\QueueInterface;
 
 abstract class AbstractQueueFactory
 {

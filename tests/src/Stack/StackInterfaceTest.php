@@ -3,13 +3,13 @@
 namespace Tests\Stack;
 
 use Tests\TestCase;
-use Collection\List\Entry;
-use Collection\Stack\Stack;
-use Collection\Stack\StackFactory;
+use SK\Collection\List\Entry;
+use SK\Collection\Stack\Stack;
+use SK\Collection\Stack\StackFactory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Collection\Stack\Interface\StackInterface;
+use SK\Collection\Stack\Interface\StackInterface;
 
 #[CoversClass(Stack::class)]
 #[UsesClass(StackFactory::class)]

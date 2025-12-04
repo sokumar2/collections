@@ -1,6 +1,6 @@
 <?php
 
-namespace Collection\List\Interface;
+namespace SK\Collection\List\Interface;
 
 interface FilterableInterface
 {

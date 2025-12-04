@@ -1,6 +1,6 @@
 <?php
 
-namespace Collection\List\Trait;
+namespace SK\Collection\List\Trait;
 
 trait ArrayableTrait
 {

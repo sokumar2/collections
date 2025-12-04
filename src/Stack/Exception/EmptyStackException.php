@@ -1,6 +1,6 @@
 <?php
 
-namespace  Collection\Stack\Exception;
+namespace SK\Collection\Stack\Exception;
 
 use Exception;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Collection\List;
+namespace SK\Collection\List;
 
 class Entry
 {

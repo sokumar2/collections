@@ -1,6 +1,6 @@
 <?php
 
-namespace  Collection\List\Exception;
+namespace SK\Collection\List\Exception;
 
 use Exception;
 

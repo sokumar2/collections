@@ -1,9 +1,9 @@
 <?php
 
-namespace Collection\List;
+namespace SK\Collection\List;
 
 use Traversable;
-use Collection\List\AbstractList;
+use SK\Collection\List\AbstractList;
 
 class ArrayList extends AbstractList {
 
