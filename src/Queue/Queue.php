@@ -1,10 +1,10 @@
 <?php
 
-namespace Collection\Queue;
+namespace SK\Collection\Queue;
 
-use Collection\List\LinkedList;
-use Collection\Queue\Interface\QueueInterface;
-use Collection\Queue\Exception\EmptyQueueException;
+use SK\Collection\List\LinkedList;
+use SK\Collection\Queue\Interface\QueueInterface;
+use SK\Collection\Queue\Exception\EmptyQueueException;
 
 class Queue extends LinkedList implements QueueInterface
 {

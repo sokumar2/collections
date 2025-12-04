@@ -1,10 +1,10 @@
 <?php
 
-namespace Collection\Stack;
+namespace SK\Collection\Stack;
 
-use Collection\List\LinkedList;
-use Collection\Stack\Interface\StackInterface;
-use Collection\Stack\Exception\EmptyStackException;
+use SK\Collection\List\LinkedList;
+use SK\Collection\Stack\Interface\StackInterface;
+use SK\Collection\Stack\Exception\EmptyStackException;
 
 class Stack extends LinkedList implements StackInterface
 {

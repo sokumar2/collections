@@ -1,12 +1,12 @@
 <?php
 
-namespace Collection\List;
+namespace SK\Collection\List;
 
-use Collection\List\Trait\ArrayableTrait;
-use Collection\List\Trait\EmptiableTrait;
-use Collection\List\Trait\CountableTrait;
-use Collection\List\Interface\ListInterface;
-use Collection\List\Exception\IndexOutOfBoundsException;
+use SK\Collection\List\Trait\ArrayableTrait;
+use SK\Collection\List\Trait\EmptiableTrait;
+use SK\Collection\List\Trait\CountableTrait;
+use SK\Collection\List\Interface\ListInterface;
+use SK\Collection\List\Exception\IndexOutOfBoundsException;
 
 abstract class AbstractList implements ListInterface
 {

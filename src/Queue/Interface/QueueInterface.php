@@ -1,8 +1,8 @@
 <?php
 
-namespace Collection\Queue\Interface;
+namespace SK\Collection\Queue\Interface;
 
-use Collection\List\Interface\ListInterface;
+use SK\Collection\List\Interface\ListInterface;
 
 interface QueueInterface extends ListInterface
 {

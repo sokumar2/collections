@@ -1,8 +1,8 @@
 <?php
 
-namespace Collection\Stack\Interface;
+namespace SK\Collection\Stack\Interface;
 
-use Collection\List\Interface\ListInterface;
+use SK\Collection\List\Interface\ListInterface;
 
 interface StackInterface extends ListInterface
 {

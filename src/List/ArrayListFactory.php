@@ -1,9 +1,9 @@
 <?php
 
-namespace Collection\List;
+namespace SK\Collection\List;
 
-use Collection\List\ArrayList;
-use Collection\List\Interface\ListInterface;
+use SK\Collection\List\ArrayList;
+use SK\Collection\List\Interface\ListInterface;
 
 class ArrayListFactory extends AbstractListFactory
 {

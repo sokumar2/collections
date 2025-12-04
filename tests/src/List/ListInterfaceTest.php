@@ -3,17 +3,16 @@
 namespace Tests\List;
 
 use Tests\TestCase;
-use Collection\List\Entry;
-use Collection\List\ArrayList;
-use Collection\List\LinkedList;
-use Collection\List\ListFactory;
-use Collection\List\ArrayListFactory;
-use Collection\List\LinkedListFactory;
+use SK\Collection\List\Entry;
+use SK\Collection\List\ArrayList;
+use SK\Collection\List\LinkedList;
+use SK\Collection\List\ArrayListFactory;
+use SK\Collection\List\LinkedListFactory;
 use PHPUnit\Framework\Attributes\UsesClass;
-use Collection\List\Interface\ListInterface;
+use SK\Collection\List\Interface\ListInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Collection\List\Exception\IndexOutOfBoundsException;
+use SK\Collection\List\Exception\IndexOutOfBoundsException;
 
 #[CoversClass(LinkedList::class)]
 #[CoversClass(ArrayList::class)]

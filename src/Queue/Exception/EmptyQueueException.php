@@ -1,6 +1,6 @@
 <?php
 
-namespace  Collection\Queue\Exception;
+namespace SK\Collection\Queue\Exception;
 
 use Exception;
 

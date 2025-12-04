@@ -1,12 +1,13 @@
 {
-    "name": "sokumar2/collections",
+    "name": "sk/collections",
     "description": "A set of interfaces for storing and manipulating a collection of objects.",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "linkedlist",
         "arraylist",
-        "stack"
+        "stack",
+        "queue"
     ],
     "require": {
         "php": ">=8.0.0"
@@ -16,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Collection\\": "src/"
+            "SK\\Collection\\": "src/"
         }
     },
     "autoload-dev": {

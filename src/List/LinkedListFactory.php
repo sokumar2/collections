@@ -1,9 +1,9 @@
 <?php
 
-namespace Collection\List;
+namespace SK\Collection\List;
 
-use Collection\List\LinkedList;
-use Collection\List\Interface\ListInterface;
+use SK\Collection\List\LinkedList;
+use SK\Collection\List\Interface\ListInterface;
 
 class LinkedListFactory extends AbstractListFactory
 {

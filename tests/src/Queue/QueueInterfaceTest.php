@@ -3,13 +3,13 @@
 namespace Tests\Queue;
 
 use Tests\TestCase;
-use Collection\List\Entry;
-use Collection\Queue\Queue;
-use Collection\Queue\QueueFactory;
+use SK\Collection\List\Entry;
+use SK\Collection\Queue\Queue;
+use SK\Collection\Queue\QueueFactory;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Collection\Queue\Interface\QueueInterface;
+use SK\Collection\Queue\Interface\QueueInterface;
 
 #[CoversClass(Queue::class)]
 #[UsesClass(QueueFactory::class)]
